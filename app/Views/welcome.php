@@ -49,15 +49,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Irsyad</td>
-                            <td>085833500950</td>
-                            <td>Jl. Rela No. 74D</td>
-                            <td><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
+                        <?php $no = 1;
+                        foreach ($user as $key => $value) : ?>
+                            <tr>
+                                <th scope="row"><?= $no++ ?></th>
+                                <td><?= $value->nama ?></td>
+                                <td><?= $value->hp ?></td>
+                                <td><?= $value->alamat ?></td>
+                                <td><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
