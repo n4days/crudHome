@@ -27,6 +27,11 @@
         <div class="card">
             <div class="card-header">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahModalProduk"><i class="fas fa-add"></i> Tambah Barang</button>
+                <div class="float-right">
+                    <form action="">
+                        <input type="input" class="form-control" name="keyword" placeholder="Search" value="<?= isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>">
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
@@ -41,19 +46,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1;
-                        foreach ($datap as $key => $value) : ?>
+                        <?php if (count($datap) > 0) : ?>
+                            <?php $no = 1;
+                            foreach ($datap as $key => $value) : ?>
+                                <tr>
+                                    <th scope="row"><?= $no++ ?></th>
+                                    <td><?= $value->namap ?></td>
+                                    <td><?= $value->skup ?></td>
+                                    <td><?= $value->desp ?></td>
+                                    <td><?= $value->merekp ?></td>
+                                    <td><button class="btn btn-warning" data-toggle="modal" data-target="#editModalProduk<?= $value->idp ?>"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#hapusModalProduk<?= $value->idp ?>"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else : ?>
                             <tr>
-                                <th scope="row"><?= $no++ ?></th>
-                                <td><?= $value->namap ?></td>
-                                <td><?= $value->skup ?></td>
-                                <td><?= $value->desp ?></td>
-                                <td><?= $value->merekp ?></td>
-                                <td><button class="btn btn-warning" data-toggle="modal" data-target="#editModalProduk<?= $value->idp ?>"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#hapusModalProduk<?= $value->idp ?>"><i class="fas fa-trash"></i></button>
-                                </td>
+                                <td colspan="6" align="center">Produk <strong><?= $_GET['keyword'] ?></strong> tidak ditemukan.</td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>

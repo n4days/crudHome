@@ -23,9 +23,16 @@ class Home extends BaseController
         // ];
 
         // master produk
-        $data = $this->userModel->findAll();
+        $keyword = $this->request->getVar('keyword');
+        if ($keyword) {
+            $data = $this->userModel->getDataSearch($keyword);
+        } else {
+            $data = $this->userModel->getData();
+        }
+
+        // $data = $this->userModel->findAll();
         $nama = [
-            "datap" => $data
+            "datap" => $data->paginate(3, 'data')
         ];
         return view('homework', $nama);
     }

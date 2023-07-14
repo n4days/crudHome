@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\SQLite3\Table;
 use CodeIgniter\Model;
 
 class User extends Model
@@ -30,4 +31,22 @@ class User extends Model
     protected $createdField  = 'created_at_p';
     protected $updatedField  = 'updated_at_p';
     protected $deletedField  = 'deleted_at_p';
+
+    public function getDataSearch($keyword = null)
+    {
+        $builder = $this->table($this->table);
+        $builder->like($this->table . '.namap', $keyword);
+        $builder->orLike($this->table . '.skup', $keyword);
+        $builder->orLike($this->table . '.desp', $keyword);
+        $builder->orLike($this->table . '.merekp', $keyword);
+        $builder->orderBy($this->table . '.idp', 'DESC');
+        return $builder;
+    }
+
+    public function getData()
+    {
+        $builder = $this->table($this->table);
+        $builder->orderBy($this->table . '.idp', 'DESC');
+        return $builder;
+    }
 }
