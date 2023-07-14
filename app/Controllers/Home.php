@@ -62,7 +62,7 @@ class Home extends BaseController
         }
     }
 
-    function createProduk()
+    public function createProduk()
     {
         $produkInsert = [
             'namap' => $this->request->getVar('namap'),
@@ -80,13 +80,28 @@ class Home extends BaseController
         }
     }
 
-    function deleteProduk($idp)
+    public function deleteProduk($idp)
     {
         // $this->userModel->delete($idp);
         // return redirect()->to('/');
 
         if ($this->userModel->delete($idp)) {
             session()->setFlashdata('success', 'Produk dihapus');
+            return redirect()->to('/');
+        }
+    }
+
+    public function updateProduk($idp)
+    {
+        $produkUpdate = [
+            'namap' => $this->request->getVar('namap'),
+            'skup' => $this->request->getVar('skup'),
+            'desp' => $this->request->getVar('desp'),
+            'merekp' => $this->request->getVar('merekp')
+        ];
+
+        if ($this->userModel->update($idp, $produkUpdate)) {
+            session()->setFlashdata('success', 'Produk diedit');
             return redirect()->to('/');
         }
     }

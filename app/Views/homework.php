@@ -49,7 +49,7 @@
                                 <td><?= $value->skup ?></td>
                                 <td><?= $value->desp ?></td>
                                 <td><?= $value->merekp ?></td>
-                                <td><button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                <td><button class="btn btn-warning" data-toggle="modal" data-target="#editModalProduk<?= $value->idp ?>"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-danger" data-toggle="modal" data-target="#hapusModalProduk<?= $value->idp ?>"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -93,19 +93,19 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nama Barang</label>
-                            <input type="type" class="form-control" name="namap">
+                            <input type="text" class="form-control" name="namap">
                         </div>
                         <div class="form-group">
                             <label>SKU Barang</label>
-                            <input type="type" class="form-control" name="skup">
+                            <input type="text" class="form-control" name="skup">
                         </div>
                         <div class="form-group">
                             <label>Deskripsi Barang</label>
-                            <input type="type" class="form-control" name="desp">
+                            <input type="text" class="form-control" name="desp">
                         </div>
                         <div class="form-group">
                             <label>Merek Barang</label>
-                            <input type="type" class="form-control" name="merekp">
+                            <input type="text" class="form-control" name="merekp">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -134,6 +134,48 @@
                     <form action="/<?= $value->idp ?>" method="post">
                         <?= csrf_field() ?>
                         <input type="hidden" name="_method" value="DELETE">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php endforeach ?>
+
+    <!-- Modal edit produk -->
+    <?php foreach ($datap as $key => $value) : ?>
+        <div class="modal fade" id="editModalProduk<?= $value->idp ?>" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Produk <strong><?= $value->namap ?></strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/<?= $value->idp ?>" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" name="namap">
+                            </div>
+                            <div class="form-group">
+                                <label>SKU Barang</label>
+                                <input type="text" class="form-control" name="skup">
+                            </div>
+                            <div class="form-group">
+                                <label>Deskripsi Barang</label>
+                                <input type="text" class="form-control" name="desp">
+                            </div>
+                            <div class="form-group">
+                                <label>Merek Barang</label>
+                                <input type="text" class="form-control" name="merekp">
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
