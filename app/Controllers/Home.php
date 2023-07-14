@@ -32,7 +32,8 @@ class Home extends BaseController
 
         // $data = $this->userModel->findAll();
         $nama = [
-            "datap" => $data->paginate(3, 'data')
+            "datap" => $data->paginate(4, 'data'),
+            'pager' =>  $this->userModel->pager
         ];
         return view('homework', $nama);
     }
