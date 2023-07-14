@@ -32,6 +32,7 @@ class Home extends BaseController
 
         // $data = $this->userModel->findAll();
         $nama = [
+            "breadcrumb" => ["Home", "Produk"],
             "datap" => $data->paginate(4, 'data'),
             'pager' =>  $this->userModel->pager
         ];

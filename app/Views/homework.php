@@ -9,6 +9,14 @@
     <div class="alert alert-success"><i class="fas fa-circle-info"></i> <?= session()->getFlashdata('success') ?></div>
 <?php endif ?>
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <?php foreach ($breadcrumb as $key => $value) : ?>
+            <li class="breadcrumb-item <?= (count($breadcrumb) - 1 <= $key) ? "active" : "" ?>"><?= (count($breadcrumb) - 1 <= $key) ? $value  : '<a href="#">' . $value . '</a>' ?></li>
+        <?php endforeach ?>
+    </ol>
+</nav>
+
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
